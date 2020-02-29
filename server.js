@@ -14,13 +14,13 @@ mongoose
 .connect(db, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
-    useCreateIndex: true})
+    useCreateIndex: true  })
 .then(()=> console.log('MongoDB connected...'))
 .catch(err => console.log(err));
 
 //Use Routes
 app.use('/api/items', require('./routes/api/items'));
-app.use('/api/items', require('./routes/api/users'));
+app.use('/api/users', require('./routes/api/users'));
 
 //Server static assets if in production
 if(process.env.NODE_ENV === 'production') {
