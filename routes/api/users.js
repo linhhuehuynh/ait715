@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-//Item Model
+//User Model
 const User = require('../../models/User');
 
 //@route POST api/users
