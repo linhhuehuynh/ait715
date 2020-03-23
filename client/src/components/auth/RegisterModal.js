@@ -68,7 +68,7 @@ class RegisterModal extends Component {
 
         const { name, email, password } = this.state;
 
-        //Cretae user object
+        //Create user object
         const newUser = {
             name,
             email,
@@ -95,7 +95,7 @@ class RegisterModal extends Component {
                         {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null}
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="name">Name</Label>
+                                <Label for="name">Username</Label>
                                 <Input
                                     type="text"
                                     name="name"

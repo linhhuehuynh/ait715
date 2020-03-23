@@ -11,7 +11,7 @@ const Item = require('../../models/Item');
 
 router.get('/', (req, res) => {
     Item.find()
-        .sort({date: -1})
+        .sort({ date: -1 })
         .then(items => res.json(items))
 });
 
@@ -21,10 +21,11 @@ router.get('/', (req, res) => {
 
 router.post('/', auth, (req, res) => {
     const newItem = new Item({
-        name: req.body.name
+        name: req.body.name,
+        description: req.body.description
     });
 
-    newItem.save().then(item =>res.json(item));
+    newItem.save().then(item => res.json(item));
 });
 
 //@route DELETE api/items/:id
@@ -33,9 +34,9 @@ router.post('/', auth, (req, res) => {
 
 router.delete('/:id', auth, (req, res) => {
     Item.findById(req.params.id)
-        .then(item => item.remove().then(() => res.json({success: true})))
-        .catch(err => res.status(404).json({success:false}));
-    });
+        .then(item => item.remove().then(() => res.json({ success: true })))
+        .catch(err => res.status(404).json({ success: false }));
+});
 
 
 module.exports = router;

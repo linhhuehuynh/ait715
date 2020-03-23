@@ -12,6 +12,8 @@ import store from './store';
 
 class App extends Component {
   componentDidMount() {
+
+    //dispatch trigger a state change
     store.dispatch(loadUser());
   }
 

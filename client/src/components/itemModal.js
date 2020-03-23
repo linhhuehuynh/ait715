@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    Form,
-    FormGroup,
-    Label,
-    Input
-} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, FormText, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
@@ -17,7 +8,9 @@ import PropTypes from 'prop-types';
 class ItemModal extends Component {
     state = {
         modal: false,
-        name: ''
+        name: '',
+        category: '',
+        description: '',
     }
 
     static propTypes = {
@@ -30,14 +23,22 @@ class ItemModal extends Component {
     }
 
     onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState(
+            { [e.target.name]: e.target.value });
+    }
+
+    onSelect = e => {
+        this.setState(
+            { [e.target.name]: e.target.value });
     }
 
     onSubmit = e => {
         e.preventDefault();
 
         const newItem = {
-            name: this.state.name
+            name: this.state.name,
+            category: this.state.category,
+            description: this.state.description,
         }
 
         //Add item via addItem action
@@ -61,24 +62,42 @@ class ItemModal extends Component {
                     isOpen={this.state.modal}
                     toggle={this.toggle}
                 >
-                    <ModalHeader toggle={this.toggle}>Add to Shopping List</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Post an Item</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
-                            <FormGroup>
-                                <Label for="item">Item</Label>
-                                <Input
-                                    type="text"
-                                    name="name"
-                                    id="item"
-                                    placeholder="Add shopping item"
-                                    onChange={this.onChange}
-                                />
-                                <Button
-                                    color="dark"
-                                    style={{ marginTop: '2rem' }}
-                                    block
-                                >Add Item
+                            <FormGroup row>
+                                <Label for="item" sm={2}>Item</Label>
+                                <Col sm={10}>
+                                    <Input
+                                        type="text"
+                                        name="name"
+                                        id="item"
+                                        placeholder="What's the item?"
+                                        onChange={this.onChange} />
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup row>
+                                <Label for="condition" sm={2}>Description</Label>
+                                <Col sm={10}>
+                                    <Input
+                                        type="text"
+                                        name="description"
+                                        id="description"
+                                        placeholder="Describe your item."
+                                        onChange={this.onChange} />
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup row>
+                                <Col sm={{ size: 10, offset: 2 }}>
+                                    <Button
+                                        color="dark"
+                                        style={{ marginTop: '2rem' }}
+                                        block
+                                    >Add Item
                             </Button>
+                                </Col>
                             </FormGroup>
                         </Form>
                     </ModalBody>
