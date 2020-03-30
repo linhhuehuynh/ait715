@@ -90,7 +90,7 @@ class RegisterModal extends Component {
                     isOpen={this.state.modal}
                     toggle={this.toggle}
                 >
-                    <ModalHeader toggle={this.toggle}>Register</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Create your account</ModalHeader>
                     <ModalBody>
                         {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null}
                         <Form onSubmit={this.onSubmit}>
@@ -127,7 +127,7 @@ class RegisterModal extends Component {
 
 
                                 <Button
-                                    color="dark"
+                                    color="info"
                                     style={{ marginTop: '2rem' }}
                                     block
                                 >Register

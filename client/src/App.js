@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import ShoppingList from './components/ShoppingList';
 import ItemModal from './components/itemModal';
+import Intro from './components/Intro';
 import { Container } from 'reactstrap';
 import { loadUser } from './actions/authActions';
 
@@ -23,6 +24,7 @@ class App extends Component {
         <div className="App">
           <AppNavbar />
           <Container>
+            <Intro />
             <ItemModal />
             <ShoppingList />
           </Container>

@@ -13,6 +13,11 @@ const ItemSchema = new Schema({
         required: true
     },
 
+    photo: {
+        type: String,
+        required: true
+    },
+
     date: {
         type: Date,
         default: Date.now

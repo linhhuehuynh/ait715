@@ -12,12 +12,13 @@ const db = config.get('mongoURI');
 
 //Connect to Mongo
 mongoose
-.connect(db, { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true,
-    useCreateIndex: true  })
-.then(()=> console.log('MongoDB connected...'))
-.catch(err => console.log(err));
+    .connect(db, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true
+    })
+    .then(() => console.log('MongoDB connected...'))
+    .catch(err => console.log(err));
 
 //Use Routes
 app.use('/api/items', require('./routes/api/items'));
@@ -25,12 +26,12 @@ app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 
 //Server static assets if in production
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     //Set static folder
     app.use(express.static('client/build'));
-
+    app.use(express.static('uploads'));
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     });
 
 }

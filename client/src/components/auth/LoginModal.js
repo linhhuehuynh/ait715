@@ -115,7 +115,7 @@ class LoginModal extends Component {
 
 
                                 <Button
-                                    color="dark"
+                                    color="info"
                                     style={{ marginTop: '2rem' }}
                                     block
                                 >Login

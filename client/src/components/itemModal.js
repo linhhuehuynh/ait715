@@ -9,8 +9,8 @@ class ItemModal extends Component {
     state = {
         modal: false,
         name: '',
-        category: '',
         description: '',
+        photo: ''
     }
 
     static propTypes = {
@@ -27,9 +27,10 @@ class ItemModal extends Component {
             { [e.target.name]: e.target.value });
     }
 
-    onSelect = e => {
+    onChangeImage = e => {
         this.setState(
-            { [e.target.name]: e.target.value });
+            { photo: URL.createObjectURL(e.target.files[0]) }
+        )
     }
 
     onSubmit = e => {
@@ -37,8 +38,8 @@ class ItemModal extends Component {
 
         const newItem = {
             name: this.state.name,
-            category: this.state.category,
             description: this.state.description,
+            photo: this.state.photo,
         }
 
         //Add item via addItem action
@@ -52,10 +53,10 @@ class ItemModal extends Component {
         return (
             <div>
                 {this.props.isAuthenticated ? <Button
-                    color="dark"
+                    color="info"
                     style={{ marginBottom: '2rem' }}
                     onClick={this.toggle}
-                >Add Item</Button> : <h4 className='mb-3 ml-4'> Please log in to manage items</h4>}
+                >Post an Item</Button> : <h4 className='mb-3 ml-4'> Please log in to manage items</h4>}
 
 
                 <Modal
@@ -78,7 +79,7 @@ class ItemModal extends Component {
                             </FormGroup>
 
                             <FormGroup row>
-                                <Label for="condition" sm={2}>Description</Label>
+                                <Label for="description" sm={2}>Description</Label>
                                 <Col sm={10}>
                                     <Input
                                         type="text"
@@ -86,6 +87,17 @@ class ItemModal extends Component {
                                         id="description"
                                         placeholder="Describe your item."
                                         onChange={this.onChange} />
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup row>
+                                <Label for="photo" sm={2}>Photo</Label>
+                                <Col sm={10}>
+                                    <Input type="file" name="photo" id="photo" onChange={this.onChangeImage} />
+                                    <FormText color="muted">
+                                        This is some placeholder block-level help text for the above input.
+                                        It's a bit lighter and easily wraps to a new line.
+                                </FormText>
                                 </Col>
                             </FormGroup>
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Button, Card, CardText, CardBody, CardTitle, CardColumns } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
@@ -23,28 +22,26 @@ class ShoppingList extends Component {
     render() {
         const { items } = this.props.item;
         return (
-            <Container>
-                <ListGroup>
-                    <TransitionGroup className="shopping-list">
-                        {items.map(({ _id, name, category, description }) => (
-                            <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem>
-                                    {this.props.isAuthenticated ? <Button
-                                        className="remove-btn"
-                                        color="danger"
-                                        size="sm"
-                                        onClick={this.onDeleteClick.bind(this, _id)}
-                                    >
-                                        &times;</Button> : null}
+            <CardColumns>
+                {items.map(({ _id, name, description, photo }) => (
 
-                                    {name}
-                                    {description}
-                                </ListGroupItem>
-                            </CSSTransition>
-                        ))}
-                    </TransitionGroup>
-                </ListGroup>
-            </Container>
+                    <Card body outline color="secondary">
+                        <CardBody>
+                            <img width="100%" src={photo} alt="Item Photo" />
+                            <CardTitle>Item: {name}</CardTitle>
+                            <CardText>Description: {description}</CardText>
+                            {this.props.isAuthenticated ? <Button
+                                className="remove-btn"
+                                color="danger"
+                                size="md"
+                                onClick={this.onDeleteClick.bind(this, _id)}
+                            >
+                                Delete</Button> : null}
+                        </CardBody>
+                    </Card>
+
+                ))}
+            </CardColumns>
         );
     }
 }
