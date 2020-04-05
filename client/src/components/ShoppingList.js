@@ -27,7 +27,7 @@ class ShoppingList extends Component {
 
                     <Card body outline color="secondary">
                         <CardBody>
-                            <img width="100%" src={photo} alt="Item Photo" />
+                            <img width="100%" src={photo} alt="Item" />
                             <CardTitle>Item: {name}</CardTitle>
                             <CardText>Description: {description}</CardText>
                             {this.props.isAuthenticated ? <Button

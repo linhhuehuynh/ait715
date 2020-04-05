@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
     Jumbotron, Container
 } from 'reactstrap';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
@@ -20,7 +19,6 @@ class Intro extends Component {
 
 
     render() {
-        const { items } = this.props.item;
         return (
             <Jumbotron fluid>
                 <Container fluid>

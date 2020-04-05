@@ -1,4 +1,6 @@
 {
     "mongoURI": "mongodb+srv://linh:linh123@cluster0-3cf0v.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "sml_myJwtSecret"
+    "jwtSecret": "sml_myJwtSecret",
+    "CLOUDINARY_API_KEY": "293829196423731",
+    "CLOUDINARY_API_SECRET": "IBfhIZSKyY2WOWDbd6FCQXQhdig"
 }

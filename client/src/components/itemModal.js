@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
-
 class ItemModal extends Component {
     state = {
         modal: false,
@@ -12,6 +11,7 @@ class ItemModal extends Component {
         description: '',
         photo: ''
     }
+
 
     static propTypes = {
         isAuthenticated: PropTypes.bool
@@ -27,26 +27,29 @@ class ItemModal extends Component {
             { [e.target.name]: e.target.value });
     }
 
-    onChangeImage = e => {
-        this.setState(
-            { photo: URL.createObjectURL(e.target.files[0]) }
-        )
-    }
+    onChangePhoto = e => {
+        this.setState({ photo: e.target.files[0] });
+    };
 
     onSubmit = e => {
         e.preventDefault();
 
-        const newItem = {
-            name: this.state.name,
-            description: this.state.description,
-            photo: this.state.photo,
-        }
+        let formData = new FormData();
+        formData.append('name', this.state.name);
+        formData.append('description', this.state.description);
+        formData.append('photo', this.state.photo);
+        this.props.addItem(formData);
 
-        //Add item via addItem action
-        this.props.addItem(newItem);
+
+        this.setState({
+            name: '',
+            description: '',
+            photo: ''
+        });
 
         //Close modal
         this.toggle();
+
     }
 
     render() {
@@ -65,7 +68,7 @@ class ItemModal extends Component {
                 >
                     <ModalHeader toggle={this.toggle}>Post an Item</ModalHeader>
                     <ModalBody>
-                        <Form onSubmit={this.onSubmit}>
+                        <Form onSubmit={this.onSubmit} encType='multipart/form-data'>
                             <FormGroup row>
                                 <Label for="item" sm={2}>Item</Label>
                                 <Col sm={10}>
@@ -93,7 +96,7 @@ class ItemModal extends Component {
                             <FormGroup row>
                                 <Label for="photo" sm={2}>Photo</Label>
                                 <Col sm={10}>
-                                    <Input type="file" name="photo" id="photo" onChange={this.onChangeImage} />
+                                    <Input type="file" name='photo' id="photo" onChange={this.onChangePhoto} />
                                     <FormText color="muted">
                                         This is some placeholder block-level help text for the above input.
                                         It's a bit lighter and easily wraps to a new line.

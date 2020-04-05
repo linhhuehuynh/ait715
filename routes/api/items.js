@@ -2,21 +2,20 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const multer = require('multer');
+const cloudinary = require('cloudinary');
+const config = require('config')
 
+//Multer configuration
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads/')
-    },
     filename: function (req, file, cb) {
         cb(null, Date.now() + file.originalname);
     }
-
 });
 
 const fileFilter = (req, file, cb) => {
     //reject a file
-    if (file.mimetype === 'image/jpg' || file.mimetype === 'image/png') {
-        cb(null, true);
+    if (!file.originalname.match(/\.(jpg|jpeg|png|JPG|JPEG|PNG)$/i)) {
+        cb(new Error('Only image files are accepted!'), false);
     } else {
         cb(null, true);
     }
@@ -30,8 +29,18 @@ const upload = multer({
     fileFilter
 });
 
+
+//Cloudinary Configuration
+cloudinary.config({
+    cloud_name: 'mycloud88',
+    api_key: config.get('CLOUDINARY_API_KEY'),
+    api_secret: config.get('CLOUDINARY_API_SECRET')
+});
+
+
 //Item Model
 const Item = require('../../models/Item');
+
 
 //@route GET api/items
 //@desc Get All Items
@@ -43,18 +52,26 @@ router.get('/', (req, res) => {
         .then(items => res.json(items))
 });
 
+
 //@route POST api/items
 //@desc Create an item
 //@access Private 
 
 router.post('/', auth, upload.single('photo'), (req, res) => {
-    const newItem = new Item({
-        name: req.body.name,
-        description: req.body.description,
-        photo: req.file.path
-    });
+    cloudinary.v2.uploader.upload(req.file.path, (err, result) => {
+        if (err) {
+            res.json(err.message);
+        }
+        req.body.photo = result.secure_url;
 
-    newItem.save().then(item => res.json(item));
+        const newItem = new Item({
+            name: req.body.name,
+            description: req.body.description,
+            photo: result.secure_url
+        });
+
+        newItem.save().then(item => res.json(item));
+    })
 });
 
 //@route DELETE api/items/:id
