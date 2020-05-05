@@ -2,6 +2,7 @@ import axios from 'axios';
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
+import history from '../history';
 
 export const getItems = () => dispatch => {
     dispatch(setItemsLoading());
@@ -25,7 +26,9 @@ export const addItem = item => (dispatch, getState) => {
                 type: ADD_ITEM,
                 payload: res.data
             })
-        ).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+        )
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+    history.push('/');
 };
 
 export const deleteItem = id => (dispatch, getState) => {

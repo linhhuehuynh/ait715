@@ -66,7 +66,10 @@ router.post('/', auth, upload.single('photo'), (req, res) => {
 
         const newItem = new Item({
             name: req.body.name,
+            category: req.body.category,
             description: req.body.description,
+            condition: req.body.condition,
+            email: req.body.email,
             photo: result.secure_url
         });
 

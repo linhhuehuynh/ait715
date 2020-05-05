@@ -8,10 +8,12 @@ class ItemModal extends Component {
     state = {
         modal: false,
         name: '',
+        category: '2',
         description: '',
+        condition: '1',
+        email: '',
         photo: ''
     }
-
 
     static propTypes = {
         isAuthenticated: PropTypes.bool
@@ -36,14 +38,20 @@ class ItemModal extends Component {
 
         let formData = new FormData();
         formData.append('name', this.state.name);
+        formData.append('category', this.state.category);
         formData.append('description', this.state.description);
+        formData.append('condition', this.state.condition);
+        formData.append('email', this.state.email);
         formData.append('photo', this.state.photo);
         this.props.addItem(formData);
 
 
         this.setState({
             name: '',
+            category: '2',
             description: '',
+            condition: '1',
+            email: '',
             photo: ''
         });
 
@@ -59,7 +67,7 @@ class ItemModal extends Component {
                     color="info"
                     style={{ marginBottom: '2rem' }}
                     onClick={this.toggle}
-                >Post an Item</Button> : <h4 className='mb-3 ml-4'> Please log in to manage items</h4>}
+                >Post a slice!</Button> : <h4 className='mb-3 ml-4'> Please log in to start!</h4>}
 
 
                 <Modal
@@ -82,13 +90,53 @@ class ItemModal extends Component {
                             </FormGroup>
 
                             <FormGroup row>
+                                <Label for="category" sm={2}>Category</Label>
+                                <Col sm={10}>
+                                    <Input type="select" name="category" id="category" value={this.state.category} onChange={this.onChange}>
+                                        <option value='2' disabled>Select</option>
+                                        {
+                                            ['Appliances', 'Auto Parts', 'Electronics & Computers', 'Furniture', 'Tools', 'Vehicles', 'Miscellaneous'].map((i, j) => {
+                                                return <option key={i} value={i}>{i}</option>
+                                            })
+                                        }
+                                    </Input>
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup row>
                                 <Label for="description" sm={2}>Description</Label>
                                 <Col sm={10}>
                                     <Input
-                                        type="text"
+                                        type="textarea"
                                         name="description"
                                         id="description"
                                         placeholder="Describe your item."
+                                        onChange={this.onChange} />
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup row>
+                                <Label for="condition" sm={2}>Condition</Label>
+                                <Col sm={10}>
+                                    <Input type="select" name="condition" id="condition" value={this.state.condition} onChange={this.onChange}>
+                                        <option value='1' disabled>Select</option>
+                                        {
+                                            ['Brand New', 'Used, Like New', 'Good', 'Acceptable', 'Old'].map((i, j) => {
+                                                return <option key={i} value={i}>{i}</option>
+                                            })
+                                        }
+                                    </Input>
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup row>
+                                <Label for="email" sm={2}>Email</Label>
+                                <Col sm={10}>
+                                    <Input
+                                        type="text"
+                                        name="email"
+                                        id="email"
+                                        placeholder="Please provide your email so others can contact you."
                                         onChange={this.onChange} />
                                 </Col>
                             </FormGroup>
@@ -98,8 +146,7 @@ class ItemModal extends Component {
                                 <Col sm={10}>
                                     <Input type="file" name='photo' id="photo" onChange={this.onChangePhoto} />
                                     <FormText color="muted">
-                                        This is some placeholder block-level help text for the above input.
-                                        It's a bit lighter and easily wraps to a new line.
+                                        Please upload an image file (jpg, jpeg, or png). File size must be less than 5MB.
                                 </FormText>
                                 </Col>
                             </FormGroup>
@@ -111,7 +158,7 @@ class ItemModal extends Component {
                                         style={{ marginTop: '2rem' }}
                                         block
                                     >Add Item
-                            </Button>
+                                    </Button>
                                 </Col>
                             </FormGroup>
                         </Form>

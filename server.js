@@ -4,11 +4,10 @@ const path = require('path');
 const app = express();
 const config = require('config');
 const cors = require('cors');
-const bodyParser = require('body-parser')
 
 //Express Bodyparser Middleware
 app.use(express.json());
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 //Enable CORS
 app.use(cors());
@@ -36,6 +35,7 @@ mongoose
 
 //Use Routes
 app.use('/api/items', require('./routes/api/items'));
+app.use('/api/requestitem', require('./routes/api/requestitem'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 

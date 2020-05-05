@@ -6,7 +6,10 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    Container
+    Container,
+    Input,
+    InputGroupAddon,
+    Button
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -35,12 +38,17 @@ class AppNavbar extends Component {
         const authLinks = (
             <Fragment>
                 <NavItem>
+                    <Input placeholder="What are you looking for?" className="mr-4" />
+                </NavItem>
+                <NavItem>
+                    <InputGroupAddon><Button color="secondary" className="mr-4">Search</Button></InputGroupAddon>
+                </NavItem>
+                <NavItem>
                     <span className="navbar-text mr-3">
                         <strong>{user ? `Welcome ${user.name}` : ''}</strong>
                     </span>
                 </NavItem>
                 <NavItem>
-
                     <Logout />
                 </NavItem>
             </Fragment>
@@ -72,7 +80,6 @@ class AppNavbar extends Component {
                 </Navbar>
             </div>
         );
-
     }
 }
 

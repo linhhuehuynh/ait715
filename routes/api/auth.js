@@ -17,18 +17,18 @@ router.post('/', (req, res) => {
 
     //Simple validation
     if (!email || !password) {
-        return res.status(400).json({ msg: 'Please enter all fields' });
+        return res.status(400).json({ msg: 'Please enter all fields.' });
     }
 
     //Check for existing user
     User.findOne({ email })
         .then(user => {
-            if (!user) return res.status(400).json({ msg: 'User does not exist' });
+            if (!user) return res.status(400).json({ msg: 'User does not exist.' });
 
             //Validate password, compare the input password with the password of user in db
             bcrypt.compare(password.toString(), user.password)
                 .then(isMatch => {
-                    if (!isMatch) return res.status(400).json({ msg: 'Invalid Credentials' });
+                    if (!isMatch) return res.status(400).json({ msg: 'Invalid Credentials.' });
 
                     jwt.sign(
                         { id: user.id },

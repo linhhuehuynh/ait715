@@ -23,7 +23,10 @@ class Intro extends Component {
             <Jumbotron fluid>
                 <Container fluid>
                     <h3 className="display-4">Welcome to ShareMySlice!</h3>
-                    <p className="lead">Are you trying to get rid of something or looking for an item? Post it here to exchange with your neighbor!</p>
+                    <hr className="my-2" />
+                    <p className="lead">Are you trying to get rid of something or looking for an item?
+                    Post it here to exchange with your neighbor! </p>
+                    <p className="lead">Life is like a pizza. Why not share and get a slice for free?</p>
                 </Container>
             </Jumbotron>
 
