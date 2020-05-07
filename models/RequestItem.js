@@ -17,6 +17,10 @@ const RequestItemSchema = new Schema({
         required: true
     },
 
+    email: {
+        type: String,
+        required: true
+    },
 
     date: {
         type: Date,

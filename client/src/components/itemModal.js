@@ -136,7 +136,7 @@ class ItemModal extends Component {
                                         type="text"
                                         name="email"
                                         id="email"
-                                        placeholder="Please provide your email so others can contact you."
+                                        placeholder="Please provide your email."
                                         onChange={this.onChange} />
                                 </Col>
                             </FormGroup>

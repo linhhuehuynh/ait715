@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModal';
 import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
+import Search from './Search';
 
 class AppNavbar extends Component {
     state = {
@@ -37,12 +38,9 @@ class AppNavbar extends Component {
 
         const authLinks = (
             <Fragment>
-                <NavItem>
-                    <Input placeholder="What are you looking for?" className="mr-4" />
-                </NavItem>
-                <NavItem>
-                    <InputGroupAddon><Button color="secondary" className="mr-4">Search</Button></InputGroupAddon>
-                </NavItem>
+
+                <Search />
+
                 <NavItem>
                     <span className="navbar-text mr-3">
                         <strong>{user ? `Welcome ${user.name}` : ''}</strong>

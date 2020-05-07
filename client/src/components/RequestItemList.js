@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, CardText, CardBody, CardTitle, CardColumns, Modal, ModalBody, Container, Row, Col } from 'reactstrap';
+import { Button, Card, CardText, CardBody, CardTitle, CardColumns, Modal, ModalBody, Container, Row, Col, CardHeader } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getRequestItems } from '../actions/requestItemActions';
 import PropTypes from 'prop-types';
@@ -19,15 +19,17 @@ class RequestItemList extends Component {
         modal: false,
         name: null,
         category: null,
-        description: null
+        description: null,
+        email: null
     };
 
     render() {
         const { requestitems } = this.props.requestitem;
         return (
             <CardColumns>
-                {requestitems.map(({ _id, name, category, description }) => (
-                    <Card body outline color="secondary">
+                {requestitems.map(({ _id, name, category, description, email }) => (
+                    <Card body outline color="info">
+                        <CardHeader><strong>In Need</strong></CardHeader>
                         <CardBody>
                             <CardTitle>Item: {name}</CardTitle>
                             <CardText>Category {category}</CardText>
@@ -35,14 +37,15 @@ class RequestItemList extends Component {
                             <div>
                                 {this.props.isAuthenticated ? <Button
                                     color="info"
-                                    style={{ marginBottom: '2rem' }}
-                                    onClick={() => this.setState({ name, category, description, modal: true })}
+                                    onClick={() => this.setState({ name, category, description, email, modal: true })}
                                 >More Details</Button> : null}
+
 
                                 <Modal
                                     name={this.state.name}
                                     category={this.state.category}
                                     description={this.state.description}
+                                    email={this.state.email}
                                     isOpen={this.state.modal}
                                     toggle={() => this.setState({ modal: false })}
                                     size="lg"
@@ -50,9 +53,11 @@ class RequestItemList extends Component {
                                     <ModalBody>
                                         <Container body outline color="secondary">
                                             <Row>
-                                                <Col xs="8"><h2>Item: {this.state.name}</h2>
-                                                    <h5>Category: {this.state.category}</h5>
-                                                    <h5>Description: {this.state.description}</h5>
+                                                <Col><h3>Item: {this.state.name}</h3>
+                                                    <h5>Category:</h5><p> {this.state.category}</p>
+                                                    <h5>Description:</h5> <p>{this.state.description}</p>
+                                                    <h5>Email:</h5>
+                                                    <p><a href={"mailto:" + this.state.email}>{this.state.email}</a></p>
                                                 </Col>
                                             </Row>
                                         </Container>

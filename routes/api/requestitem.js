@@ -26,7 +26,8 @@ router.post('/', auth, (req, res) => {
     const newItem = new RequestItem({
         name: req.body.name,
         category: req.body.category,
-        description: req.body.description
+        description: req.body.description,
+        email: req.body.email
     });
 
     newItem.save().then(requestitem => res.json(requestitem));

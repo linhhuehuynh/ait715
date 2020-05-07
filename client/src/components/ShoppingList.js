@@ -49,6 +49,14 @@ class ShoppingList extends Component {
                                     onClick={() => this.setState({ name, photo, category, description, condition, email, modal: true })}
                                 >More Details</Button> : null}
 
+                                {this.props.isAuthenticated ? <Button
+                                    className="remove-btn"
+                                    color="danger"
+                                    size="md"
+                                    onClick={this.onDeleteClick.bind(this, _id)}
+                                >
+                                    Delete</Button> : null}
+
                                 <Modal
                                     name={this.state.name}
                                     category={this.state.category}

@@ -53,6 +53,15 @@ router.get('/', (req, res) => {
 });
 
 
+// router.get('/?name=', (req, res) => {
+//     const { text } = req.body;
+//     var condition = text ? { name: { $search: text } } : {};
+//     Item.find(condition)
+//         .sort({ date: -1 })
+//         .then(items => res.json(items))
+// });
+
+
 //@route POST api/items
 //@desc Create an item
 //@access Private 

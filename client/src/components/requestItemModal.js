@@ -9,7 +9,8 @@ class RequestItemModal extends Component {
         modal: false,
         name: '',
         category: '2',
-        description: ''
+        description: '',
+        email: ''
     }
 
     static propTypes = {
@@ -33,6 +34,7 @@ class RequestItemModal extends Component {
             name: this.state.name,
             category: this.state.category,
             description: this.state.description,
+            email: this.state.email
         }
 
         //Add item via addItem action
@@ -93,6 +95,18 @@ class RequestItemModal extends Component {
                                         name="description"
                                         id="description"
                                         placeholder="Describe the item as detailed as possible."
+                                        onChange={this.onChange} />
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup row>
+                                <Label for="email" sm={2}>Email</Label>
+                                <Col sm={10}>
+                                    <Input
+                                        type="text"
+                                        name="email"
+                                        id="email"
+                                        placeholder="Please provide your email."
                                         onChange={this.onChange} />
                                 </Col>
                             </FormGroup>
