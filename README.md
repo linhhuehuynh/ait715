@@ -1,5 +1,5 @@
 # sharemyslice
-NPM RUN DEV 
+NPM RUN DEV: 
 Start server and client concurrently
 
 Application link:
